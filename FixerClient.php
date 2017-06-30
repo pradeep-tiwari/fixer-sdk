@@ -31,7 +31,7 @@ class FixerClient {
             throw new BadParameterException('Please provide a string or a closure.');
         }
         
-        return $this->_fixer->latest($input);
+        return json_decode($this->_fixer->latest($input));
         
     }
     
@@ -40,7 +40,7 @@ class FixerClient {
             throw new BadParameterException('Please provide a valid date.');
         }
         
-        return $this->_fixer->historicalRates(new \DateTime($date));
+        return json_decode($this->_fixer->historicalRates($date));
     }
     
     /**
@@ -58,7 +58,7 @@ class FixerClient {
             throw new UnsupportedCurrencySymbolException(sprintf($msg, $target));
         }
         
-        return $this->_fixer->symbolicRates($base, $target);
+        return json_decode($this->_fixer->symbolicRates($base, $target));
     }
     
 }

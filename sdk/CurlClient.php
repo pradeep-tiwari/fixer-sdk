@@ -6,44 +6,23 @@ namespace sdk;
 use sdk\exceptions\APIUnavailableException;
 
 class CurlClient {
-    
-    private $_url;   
-    private $_response = [];
-
-    
     public function request(string $url = '') {
-        $this->_url = $url;
-        
-        $ch = curl_init($this->getURL());
-		curl_setopt_array($ch, array(
-			// CURLOPT_CONNECTTIMEOUT => 1,
-			// CURLOPT_TIMEOUT => 5,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_FOLLOWLOCATION => true
+        $curl = curl_init();
+		
+		// Set some options - we are passing in a useragent too here
+		curl_setopt_array($curl, array(
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_URL => $url,
+			CURLOPT_USERAGENT => 'Codular Sample cURL Request'
 		));
-        
-        return $this->_response($ch);
-    }
-    
-    private function _response($ch = null) {
-        $response = curl_exec($ch);
-		$this->response['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		
-        if ($this->response['status'] != 200 or $response == '') {
-			throw new APIUnavailableException('API Unreachable');
-		}
+		// Send the request & save response to $resp
+		$resp = curl_exec($curl);
 		
-        // escaped characters
-		$response = str_replace('\\', '', $response);
+		// Close request to clear up some resources
+		curl_close($curl);
 		
-        $this->response['body'] = json_decode($response);
-		if ($this->response['body']->type != 'success') {
-			throw new APIUnavailableException('API Failed');
-		}
-		
-        $this->cleanUp();
-		
-        return $this->response['body']->value;
+		return $resp;
     }
     
 }
