@@ -2,11 +2,17 @@
 
 namespace FixerClient;
 
-require_once './sdk/Fixer.php';
-require_once './sdk/.php';
+/**
+ * Instead of manual rquires, we can implement autoloader or use
+ * composer as namespaced autoloader.
+ */
+/*require_once './sdk/Fixer.php';
+require_once './sdk/.php';*/
+
 
 use sdk\Fixer\Fixer as Fixer;
 use sdk\CurlClient as CurlClient;
+use sdk\currency\Currency;
 use sdk\exceptions\BadParameterException;
 
 class FixerClient {
@@ -26,6 +32,28 @@ class FixerClient {
         
         return $fixer->latest($input);
         
+    }
+    
+    public function historicalRates(string $date = '') {
+        if(empty(trim($dates))) {
+            throw new BadParameterException('Please provide a valid date.');
+        }
+        
+        return $fixer->historicalRates(new Date($date));
+    }
+    
+    public function symbolicRates(string $base, string $target) {
+        if(!Currency::isValidSymbol($base)) {
+            $msg = 'Base currency symbol is invalid: %s';
+            throw new UnsupportedCurrencySymbolException(sprintf($msg, $base));
+        }
+        
+        if(!Currency::isValidSymbol($target)) {
+            $msg = 'Target currency symbol is invalid: %s';
+            throw new UnsupportedCurrencySymbolException(sprintf($msg, $target));
+        }
+        
+        return $fixer->symbolicRates($base, $target);
     }
     
 }
