@@ -42,6 +42,10 @@ class FixerClient {
         return $fixer->historicalRates(new Date($date));
     }
     
+    /**
+     * NOTE: Rather than making exception messages here, we can implement
+     * it in the Currency class itself.
+     */
     public function symbolicRates(string $base, string $target) {
         if(!Currency::isValidSymbol($base)) {
             $msg = 'Base currency symbol is invalid: %s';
