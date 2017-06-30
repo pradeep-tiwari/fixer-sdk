@@ -18,7 +18,7 @@ class Fixer {
      *
      * @return  Returns the exchanges rates based on a historical date.
      */
-    public function historicalRates(Date $date) {
+    public function historicalRates(\DateTime $date) {
         
     }
     

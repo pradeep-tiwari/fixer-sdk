@@ -17,29 +17,30 @@ use sdk\exceptions\BadParameterException;
 
 class FixerClient {
     
+    private $_fixer;
     private $_curlClient;
     
     public function __construct($url = '') {
-        $this->fixer = new Fixer();
+        $this->_fixer = new Fixer();
         $this->_curlClient = new CurlClient($url);
     }
     
     public function latest($input) {
         
-        if(!is_string($input) || !(input instanceof Closure)) {
+        if(!is_string($input) || ($input instanceof Closure)) {
             throw new BadParameterException('Please provide a string or a closure.');
         }
         
-        return $fixer->latest($input);
+        return $this->_fixer->latest($input);
         
     }
     
     public function historicalRates(string $date = '') {
-        if(empty(trim($dates))) {
+        if(empty(trim($date))) {
             throw new BadParameterException('Please provide a valid date.');
         }
         
-        return $fixer->historicalRates(new Date($date));
+        return $this->_fixer->historicalRates(new \DateTime($date));
     }
     
     /**
@@ -57,7 +58,7 @@ class FixerClient {
             throw new UnsupportedCurrencySymbolException(sprintf($msg, $target));
         }
         
-        return $fixer->symbolicRates($base, $target);
+        return $this->_fixer->symbolicRates($base, $target);
     }
     
 }
