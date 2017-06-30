@@ -1,0 +1,11 @@
+{
+    "name": "pramod/fixer-sdk",
+    "description": "Demo fixer-sdk",
+    "authors": [
+        {
+            "name": "Pradeep T.",
+            "email": "pt21388@gmail.com"
+        }
+    ],
+    "require": {}
+}
