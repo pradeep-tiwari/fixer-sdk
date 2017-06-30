@@ -1,6 +1,6 @@
 <?php
 
-namespace sdk\Fixer;
+namespace sdk;
 
 class Fixer {
     

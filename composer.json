@@ -6,7 +6,7 @@
             "FixerClient.php"
         ],
         "psr-4": {
-            "sdk\\Fixer\\": "sdk/"
+            "sdk\\": "sdk/"
         }
     },
     "authors": [

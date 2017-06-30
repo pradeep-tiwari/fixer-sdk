@@ -10,8 +10,8 @@ namespace FixerClient;
 require_once './sdk/.php';*/
 
 
-use sdk\Fixer\Fixer as Fixer;
-use sdk\CurlClient as CurlClient;
+use sdk\Fixer;
+use sdk\CurlClient;
 use sdk\currency\Currency;
 use sdk\exceptions\BadParameterException;
 

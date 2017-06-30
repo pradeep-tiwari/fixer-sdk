@@ -1,6 +1,6 @@
 <?php
 
-namespace sdk\CurlClient;
+namespace sdk;
 
 //use sdk\http\Response;
 use sdk\exceptions\APIUnavailableException;
