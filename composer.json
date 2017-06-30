@@ -1,0 +1,19 @@
+{
+    "name": "pramod/fixer-sdk",
+    "description": "Demo fixer-sdk",
+	"autoload": {
+        "files": [
+            "FixerClient.php"
+        ],
+        "psr-4": {
+            "sdk\\Fixer\\": "sdk/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pradeep T.",
+            "email": "pt21388@gmail.com"
+        }
+    ],
+    "require": {}
+}
